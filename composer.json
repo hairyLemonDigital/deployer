@@ -1,0 +1,54 @@
+{
+    "name": "hairylemonltd/deployer",
+    "description": "hairyLemon Deployment for Laravel & Statamic3",
+    "keywords": [
+        "hairylemonltd",
+        "deployer"
+    ],
+    "homepage": "https://github.com/hairylemonltd/deployer",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Carl Bowden",
+            "email": "carl@hairylemon.co.nz",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^6.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^4.0",
+        "phpunit/phpunit": "^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "HairyLemonLtd\\Deployer\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "HairyLemonLtd\\Deployer\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "HairyLemonLtd\\Deployer\\DeployerServiceProvider"
+            ],
+            "aliases": {
+                "Deployer": "HairyLemonLtd\\Deployer\\DeployerFacade"
+            }
+        }
+    }
+}
