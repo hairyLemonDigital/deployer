@@ -16,8 +16,9 @@
         }
     ],
     "require": {
-        "php": "^7.1",
-        "illuminate/support": "^6.0"
+        "php": "^7.3",
+        "illuminate/support": "^6.0|^7.0|^8.0",
+        "lorisleiva/laravel-deployer": "^0.3.5"
     },
     "require-dev": {
         "orchestra/testbench": "^4.0",
