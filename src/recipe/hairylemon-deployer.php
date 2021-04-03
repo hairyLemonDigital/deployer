@@ -1,8 +1,9 @@
 <?php
 
 namespace Deployer;
-$pathto = '../../'
-require '..//recipe/common.php';
+
+require 'recipe/laravel-deployer.php';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,7 @@ require '..//recipe/common.php';
 |
 */
 
-require 'task/defaults.php';
+/*require 'task/defaults.php';
 require 'task/helpers.php';
 require 'task/common.php';
 
@@ -24,7 +25,7 @@ require 'task/fpm.php';
 require 'task/hook.php';
 require 'task/logs.php';
 require 'task/npm.php';
-require 'task/yarn.php';
+require 'task/yarn.php';*/
 
 /*
 |--------------------------------------------------------------------------
@@ -37,11 +38,11 @@ require 'task/yarn.php';
 |
 */
 
-require 'strategy/basic.php';
+/*require 'strategy/basic.php';
 require 'strategy/firstdeploy.php';
 require 'strategy/local.php';
 require 'strategy/pull.php';
-require 'strategy/upload.php';
+require 'strategy/upload.php';*/
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,7 @@ require 'strategy/upload.php';
 |
 */
 
+/*
 desc('Deploy your application');
 task('deploy', function() {
     invoke('ld:check_strategy');
@@ -71,3 +73,4 @@ after('deploy:failed', 'deploy:unlock');
 
 // Add rollback hook.
 after('rollback', 'hook:rollback');
+*/

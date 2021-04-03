@@ -34,8 +34,7 @@ class ConfigFile extends BaseConfigFile implements Arrayable
 
     public function __construct($configs)
     {
-        $this->configs = collect($configs);
-        $this->filesystem = app(Filesystem::class);
+        parent::__construct($configs);
     }
 
     public function get($key, $default = null)

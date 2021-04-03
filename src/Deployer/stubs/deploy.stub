@@ -7,7 +7,7 @@
 
 namespace Deployer;
 
-require 'recipe/laravel-deployer.php';
+require 'recipe/hairylemon-deployer.php';
 
 /*
  * Includes
