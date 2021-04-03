@@ -4,7 +4,7 @@ namespace HairyLemonLtd\Deployer;
 
 use Illuminate\Support\Arr;
 use Lorisleiva\LaravelDeployer\ConfigFileBuilder As LaravelDeployerConfigFileBuilder;
-use Lorisleiva\LaravelDeployer\ConfigFile;
+use HairyLemonLtd\Deployer\ConfigFile;
 
 class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
 {
@@ -26,9 +26,10 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
             'application' => "env('APP_NAME', 'Laravel')",
         ],
         'hosts' => [
-            'example.com' => [
-                'deploy_path' => '/var/www/example.com',
-                'user' => 'root',
+            'master.cluster.16h.io' => [
+                'deploy_path' => '/var/www/clients/',
+                'user' => 'hairylemon',
+                'env'  => 'dev' // production
             ]
         ],
         'localhost' => [],
@@ -42,4 +43,14 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
         parent::__construct(); // loads config above
     }
 
+    /**
+     * Build a config file object based on the information
+     * collected so far.
+     *
+     * @return \HairyLemonLtd\Deployer\ConfigFile
+     */
+    public function build(): \HairyLemonLtd\Deployer\ConfigFile
+    {
+        return new ConfigFile($this->configs);
+    }
 }

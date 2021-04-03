@@ -82,7 +82,13 @@ class DeployInit extends BaseCommand
             );
         }
 
+        $user = $this->ask(
+            'Username for ' .$hostname
+        );
+
         $this->builder->setHost('name', $hostname);
+        $this->builder->setHost('user', $user);
+
     }
 
     public function askPhpVersion()
