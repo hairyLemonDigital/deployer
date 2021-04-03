@@ -2,7 +2,7 @@
 
 namespace HairyLemonLtd\Deployer\Commands;
 
-use HairyLemonLtd\Deployer\Commands\BaseCommand;
+use Lorisleiva\LaravelDeployer\Commands\BaseCommand;
 use HairyLemonLtd\Deployer\ConfigFileBuilder;
 
 class DeployInit extends BaseCommand
