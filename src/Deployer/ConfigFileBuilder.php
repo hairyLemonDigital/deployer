@@ -38,9 +38,7 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
             ]
         ],
         'localhost' => [],
-        'include' => [
-            'recipe/hairylemon-deployer.php',
-        ],
+        'include' => [],
         'custom_deployer_file' => false,
     ];
 
