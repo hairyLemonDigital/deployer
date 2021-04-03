@@ -29,7 +29,7 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
             'master.cluster.16h.io' => [
                 'deploy_path' => '/var/www/clients/',
                 'user' => 'hairylemon',
-                'env'  => 'dev' // production
+                'type'  => 'dev' // production
             ]
         ],
         'localhost' => [],

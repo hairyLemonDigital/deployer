@@ -86,9 +86,13 @@ class DeployInit extends BaseCommand
             'Username for ' .$hostname
         );
 
+        $type = $this->ask('Site type? ' . ' [ dev | production ]');
+        $webroot = $this->ask( 'Webroot? ' . ' [ ie: {site-name} ]');
+
         $this->builder->setHost('name', $hostname);
         $this->builder->setHost('user', $user);
-
+        $this->builder->setHost('type', $type);
+        $this->builder->setHost('webroot', $webroot);
     }
 
     public function askPhpVersion()
@@ -101,9 +105,14 @@ class DeployInit extends BaseCommand
 
     public function defineDeployementPath()
     {
+        $ds = DIRECTORY_SEPARATOR;
+
         $path = $this->ask(
             'Deployment path (absolute to the server)', 
             $this->builder->getHost('deploy_path')
+            .$ds. $this->builder->getHost('user')
+            .$ds. $this->builder->getHost('type')
+            .$ds. $this->builder->getHost('webroot')
         );
 
         $this->builder->setHost('deploy_path', $path);
