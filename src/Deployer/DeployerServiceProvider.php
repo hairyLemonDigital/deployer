@@ -6,6 +6,10 @@ use Illuminate\Support\ServiceProvider;
 
 class DeployerServiceProvider extends ServiceProvider
 {
+    protected $commands = [
+        Commands\DeployInit::class,
+    ];
+
     /**
      * Bootstrap the application services.
      */
@@ -20,9 +24,13 @@ class DeployerServiceProvider extends ServiceProvider
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         if ($this->app->runningInConsole()) {
-            $this->publishes([
+
+            $this->commands($this->commands);
+
+            // boiler plate
+            /*$this->publishes([
                 __DIR__.'/../config/config.php' => config_path('deployer.php'),
-            ], 'config');
+            ], 'config');*/
 
             // Publishing the views.
             /*$this->publishes([
@@ -49,12 +57,14 @@ class DeployerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'deployer');
+       /* // Automatically apply the package configuration
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'deployer');*/
 
         // Register the main class to use with the facade
-        $this->app->singleton('deployer', function () {
+        /*$this->app->singleton('deployer', function () {
             return new Deployer;
-        });
+        });*/
     }
+
+
 }
