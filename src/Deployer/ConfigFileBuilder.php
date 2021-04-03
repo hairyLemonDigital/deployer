@@ -11,7 +11,7 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
     const DEFAULT_PHP_VERSION = '7.3';
 
     protected $configs = [
-        'default' => 'basic',
+        'default' => 'normal', // the hairylemon one
         'strategies' => [],
         'hooks' => [
             'start' => [],
@@ -28,6 +28,17 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
             'shared_dirs'   => [
                 'storage',
                 'public/assets'
+            ],
+            'writeable_dirs' => [
+                'bootstrap/cache',
+                'storage',
+                'storage/app',
+                'storage/app/public',
+                'storage/framework',
+                'storage/framework/cache',
+                'storage/framework/sessions',
+                'storage/framework/views',
+                'storage/logs',
             ]
         ],
         'hosts' => [

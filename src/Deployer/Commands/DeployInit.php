@@ -48,6 +48,7 @@ class DeployInit extends BaseCommand
         $this->defineHostname();
         $this->defineDeployementPath();
         $this->defineAdditionalHooks();
+
     }
 
     public function welcomeMessage($emoji, $message)
@@ -71,6 +72,12 @@ class DeployInit extends BaseCommand
         );
 
         $this->builder->add('include', base_path().'/vendor/hairylemonltd/deployer/src/recipe/hairylemon-deployer.php');
+
+        // add statamic to the writeable_dirs if it exists
+        if(is_dir(base_path('storage/statamic'))){
+            $this->builder->add('options.writeable_dirs', 'storage/statamic');
+        }
+
         $this->builder->set('options.repository', $repository);
     }
 
@@ -133,7 +140,7 @@ class DeployInit extends BaseCommand
         );
         
         if ($npm !== 'No') {
-            $manager = $npm === 'Yes using `npm run production`' ? 'npm' : 'yarn';
+
             switch ($npm){
                 case 'Yes using `npm run production`':
                     $this->builder->add('hooks.build', "npm:install");

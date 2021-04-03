@@ -20,6 +20,7 @@ task('strategy:firstdeploy', [
     'cleanup',
     'firstdeploy:cleanup',
     'hook:done',
+    'firstdeploy:shared_files_message'
 ]);
 
 /**
@@ -54,4 +55,20 @@ task('firstdeploy:cleanup', function () {
     if (get('debug', false) || askConfirmation($question, false)) {
         run("cd {{deploy_path}} && rm -rf $filesToDelete");
     }
+});
+
+desc('Display a message about coping the shared files over and .env');
+task('firstdeploy:shared_files_message', function () {
+
+    writeln('');
+    writeln('|'.str_repeat('-', 56));
+    writeln('| <fg=yellow;options=bold>[NOTE] You need to check the shared folder on the server</>');
+    writeln('|'.str_repeat('-', 56));
+    writeln('|');
+    writeln('| The server now has the files setup and a shared folder');
+    writeln('| nas been made. Please setup the .env file, which is ');
+    writeln('| empty after the first deploy');
+    writeln('');
+    writeln('');
+
 });

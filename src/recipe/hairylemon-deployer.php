@@ -35,7 +35,9 @@ require 'task/yarn.php';*/
 |
 */
 
-require 'strategy/normal.php';
+require __DIR__.'/../strategy/firstdeploy.php';
+require __DIR__.'/../strategy/normal.php';
+
 /*require 'strategy/firstdeploy.php';
 require 'strategy/local.php';
 require 'strategy/pull.php';
