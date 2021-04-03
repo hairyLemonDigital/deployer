@@ -125,22 +125,40 @@ class DeployInit extends BaseCommand
             [
                 'No',
                 'Yes using `npm run production`',
+                'Yes using `npm run development`',
                 'Yes using `yarn production`',
+                'Yes using `yarn development`',
             ], 1
         );
         
         if ($npm !== 'No') {
             $manager = $npm === 'Yes using `npm run production`' ? 'npm' : 'yarn';
-            $this->builder->add('hooks.build', "$manager:install");
-            $this->builder->add('hooks.build', "$manager:production");
+            switch ($npm){
+                case 'Yes using `npm run production`':
+                    $this->builder->add('hooks.build', "npm:install");
+                    $this->builder->add('hooks.build', "npm:production");
+                    break;
+                case 'Yes using `npm run development`':
+                    $this->builder->add('hooks.build', "npm:install");
+                    $this->builder->add('hooks.build', "npm:development");
+                    break;
+                case 'Yes using `yarn production`':
+                    $this->builder->add('hooks.build', "yarn:install");
+                    $this->builder->add('hooks.build', "yarn:production");
+                    break;
+                case 'Yes using `yarn development`':
+                    $this->builder->add('hooks.build', "yarn:install");
+                    $this->builder->add('hooks.build', "yarn:development");
+                    break;
+            }
         }
 
-        if ($this->confirm('Do you want to migrate during deployment?', true)) {
+        if ($this->confirm('Do you want to run pending migrations during deployment?', false)) {
             $this->builder->add('hooks.ready', 'artisan:migrate');
         }
 
-        if ($this->confirm('Do you want to terminate horizon after each deployment?')) {
+        /*if ($this->confirm('Do you want to terminate horizon after each deployment?')) {
             $this->builder->add('hooks.ready', 'artisan:horizon:terminate');
-        }
+        }*/
     }
 }

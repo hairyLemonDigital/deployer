@@ -24,6 +24,11 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
         ],
         'options' => [
             'application' => "env('APP_NAME', 'Laravel')",
+            'writable_mode' => 'chmod',
+            'shared_dirs'   => [
+                'storage',
+                'public/assets'
+            ]
         ],
         'hosts' => [
             'master.cluster.16h.io' => [
@@ -33,7 +38,9 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
             ]
         ],
         'localhost' => [],
-        'include' => [],
+        'include' => [
+            'recipe/hairylemon-deployer.php',
+        ],
         'custom_deployer_file' => false,
     ];
 
