@@ -2,9 +2,6 @@
 
 namespace Deployer;
 
-require 'recipe/laravel-deployer.php';
-
-
 /*
 |--------------------------------------------------------------------------
 | Additional tasks provided by Laravel Deployer
@@ -38,11 +35,12 @@ require 'task/yarn.php';*/
 |
 */
 
-/*require 'strategy/basic.php';
-require 'strategy/firstdeploy.php';
+require 'strategy/normal.php';
+/*require 'strategy/firstdeploy.php';
 require 'strategy/local.php';
 require 'strategy/pull.php';
-require 'strategy/upload.php';*/
+require 'strategy/upload.php';
+*/
 
 /*
 |--------------------------------------------------------------------------
