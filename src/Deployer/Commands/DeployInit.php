@@ -109,7 +109,7 @@ class DeployInit extends BaseCommand
 
         $path = $this->ask(
             'Deployment path (absolute to the server)', 
-            $this->builder->getHost('deploy_path')
+            $this->builder->getHost('deploy_path')  // in
             .$ds. $this->builder->getHost('user')
             .$ds. $this->builder->getHost('type')
             .$ds. $this->builder->getHost('webroot')
