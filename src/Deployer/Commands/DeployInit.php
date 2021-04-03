@@ -70,7 +70,7 @@ class DeployInit extends BaseCommand
             $this->builder->get('options.repository')
         );
 
-        $this->builder->add('include', [base_path().'/vendor/hairylemonltd/deployer/src/recipe/hairylemon-deployer.php']);
+        $this->builder->add('include', base_path().'/vendor/hairylemonltd/deployer/src/recipe/hairylemon-deployer.php');
         $this->builder->set('options.repository', $repository);
     }
 
