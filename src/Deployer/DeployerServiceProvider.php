@@ -2,9 +2,10 @@
 
 namespace HairyLemonLtd\Deployer;
 
+use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 
-class DeployerServiceProvider extends ServiceProvider
+class DeployerServiceProvider extends ServiceProvider implements DeferrableProvider
 {
     protected $commands = [
         Commands\DeployInit::class,

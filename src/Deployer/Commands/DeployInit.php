@@ -2,7 +2,7 @@
 
 namespace HairyLemonLtd\Deployer\Commands;
 
-use Lorisleiva\LaravelDeployer\Commands\BaseCommand;
+use HairyLemonLtd\Deployer\Commands\BaseCommand;
 use HairyLemonLtd\Deployer\ConfigFileBuilder;
 
 class DeployInit extends BaseCommand
@@ -10,7 +10,7 @@ class DeployInit extends BaseCommand
     protected $builder;
 
     protected $signature = "deploy:init
-        {hostname? : hairyLemon Deployer !!! The hostname of the deployment server}
+        {hostname? : The hostname of the deployment server}
     ";
     
     protected $useDeployerOptions = false;
@@ -42,34 +42,12 @@ class DeployInit extends BaseCommand
 
     public function configureBuilder()
     {
-        if ($this->option('all')) {
-            return $this->allOptions();
-        }
 
-        $this->welcomeMessage('🚀',  'Let\'s configure your deployment!');
+        $this->welcomeMessage('🚀',  'Let\'s configure your hairyLemon deployment!');
         $this->defineRepositoryUrl();
         $this->defineHostname();
-        $this->defineForge();
         $this->defineDeployementPath();
         $this->defineAdditionalHooks();
-    }
-
-    public function allOptions()
-    {
-        if ($hostname = $this->argument('hostname')) {
-            $this->builder->setHost('name', $hostname);
-        }
-
-        if ($this->option('forge')) {
-            $this->builder->useForge();
-        } else {
-            $this->builder->reloadFpm();
-        }
-
-        $this->builder->add('hooks.build', 'npm:install');
-        $this->builder->add('hooks.build', 'npm:production');
-        $this->builder->add('hooks.ready', 'artisan:migrate');
-        $this->builder->add('hooks.ready', 'artisan:horizon:terminate');
     }
 
     public function welcomeMessage($emoji, $message)
@@ -105,19 +83,6 @@ class DeployInit extends BaseCommand
         }
 
         $this->builder->setHost('name', $hostname);
-    }
-
-    public function defineForge()
-    {
-        $question = 'Do you use Laravel Forge to maintain your server?';
-        
-        if ($this->option('forge') || $this->confirm($question)) {
-            return $this->builder->useForge($this->askPhpVersion());
-        }
-
-        if($this->confirm('Do you want to reload php-fpm after each deployment?')) {
-            return $this->builder->reloadFpm($this->askPhpVersion());
-        };
     }
 
     public function askPhpVersion()

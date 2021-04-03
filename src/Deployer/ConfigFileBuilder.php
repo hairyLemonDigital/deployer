@@ -4,7 +4,7 @@ namespace HairyLemonLtd\Deployer;
 
 use Illuminate\Support\Arr;
 use Lorisleiva\LaravelDeployer\ConfigFileBuilder As LaravelDeployerConfigFileBuilder;
-use HairyLemonLtd\Deployer\ConfigFile;
+use Lorisleiva\LaravelDeployer\ConfigFile;
 
 class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
 {
