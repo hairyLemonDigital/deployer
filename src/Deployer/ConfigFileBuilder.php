@@ -46,7 +46,12 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
                 'deploy_path' => '/var/www/clients',
                 'user' => 'hairylemon',
                 'type'  => 'dev' // production
-            ]
+            ],
+            'cigna-control' => [
+                'deploy_path' => '/var/www/clients',
+                'user'        => 'cigna',
+                'type'        => 'dev' // production
+            ],
         ],
         'localhost' => [],
         'include' => [],

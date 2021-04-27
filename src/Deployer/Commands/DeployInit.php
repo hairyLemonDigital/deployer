@@ -85,7 +85,7 @@ class DeployInit extends BaseCommand
     {
         if (! $hostname = $this->argument('hostname')) {
             $hostname = $this->ask(
-                'Hostname of your deployment server', 
+                'Host/SSH name of your deployment server, at the moment just cigna-control or master.cluster.16h.io ',
                 $this->builder->getHostname()
             );
         }
