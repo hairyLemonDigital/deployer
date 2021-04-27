@@ -97,10 +97,10 @@ class DeployInit extends BaseCommand
         $type = $this->ask('Site type? ' . ' [ dev | production ]');
         $webroot = $this->ask( 'Webroot? ' . ' [ ie: {site-name} ]');
 
-        $this->builder->setHost('name', $hostname);
-        $this->builder->setHostData('user', $user);
-        $this->builder->setHostData('type', $type);
-        $this->builder->setHostData('webroot', $webroot);
+        $this->builder->setHostname($hostname);
+        $this->builder->setHost('user', $user);
+        $this->builder->setHost('type', $type);
+        $this->builder->setHost('webroot', $webroot);
     }
 
     public function askPhpVersion()
