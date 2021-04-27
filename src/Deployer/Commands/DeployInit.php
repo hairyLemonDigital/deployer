@@ -98,9 +98,9 @@ class DeployInit extends BaseCommand
         $webroot = $this->ask( 'Webroot? ' . ' [ ie: {site-name} ]');
 
         $this->builder->setHost('name', $hostname);
-        $this->builder->setHost('user', $user);
-        $this->builder->setHost('type', $type);
-        $this->builder->setHost('webroot', $webroot);
+        $this->builder->setHostData('user', $user);
+        $this->builder->setHostData('type', $type);
+        $this->builder->setHostData('webroot', $webroot);
     }
 
     public function askPhpVersion()
@@ -117,7 +117,7 @@ class DeployInit extends BaseCommand
 
         $this->info('- get host deploy_path: ' . $this->builder->getHost('deploy_path'));
         //$this->info('- head($this->builder->configs[hosts] ): ' .head($this->builder->configs['hosts'] ) );
-        $this->info('-  $this->builder->configs ' .print_r($this->builder->configs,true ) );
+        //$this->info('-  $this->builder->configs ' .print_r($this->builder->configs,true ) );
 
 
         $path = $this->ask(
