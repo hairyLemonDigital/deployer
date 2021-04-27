@@ -90,7 +90,9 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
     {
         $hostname = $this->getHostname();
 
-        echo "hostname: " . print_r($hostname, true) ."\n\n";
+
+        echo " [$key, $value] hostname: " . $hostname."\n";
+        echo " head(\$this->configs['hosts']): " . print_r(head($this->configs['hosts']), true) ."\n";
 
         if ($key !== 'name') {
             $this->configs['hosts'][$hostname][$key] = $value;
