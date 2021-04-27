@@ -2,6 +2,7 @@
 
 namespace HairyLemonLtd\Deployer;
 
+use Deployer\Exception\Exception;
 use Illuminate\Support\Arr;
 use Lorisleiva\LaravelDeployer\ConfigFileBuilder As LaravelDeployerConfigFileBuilder;
 use HairyLemonLtd\Deployer\ConfigFile;
@@ -43,21 +44,19 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
             ]
         ],
         'hosts' => [
+            // there can only be one default!
             'master.cluster.16h.io' => [
                 'deploy_path' => '/var/www/clients',
                 'user' => 'hairylemon',
                 'type'  => 'dev' // production
-            ],
-            'cigna-control' => [
-                'deploy_path' => '/var/www/clients',
-                'user'        => 'cigna',
-                'type'        => 'dev' // production
-            ],
+            ]
         ],
         'localhost' => [],
         'include' => [],
         'custom_deployer_file' => false,
     ];
+
+    private $host;
 
 
     public function __construct()
@@ -78,35 +77,45 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
 
     public function getHostname()
     {
+        if($this->host ?? false){
+            return $this->host;
+        }
+
         return array_search(head($this->configs['hosts']), $this->configs['hosts']);
     }
 
     /**
      * Update the host configurations with the given key/value pair.
-     *
      * @return self
      */
-    public function setHost($key, $value)
+    public function setHost($key, $value) // key is not used
     {
-        $hostname = $this->getHostname();
+        if(! $this->host ){
+            $default_hostname = $this->getHostname();
+        }
 
+        echo "default hostname: " .$default_hostname."\n";
 
-        echo " [$key, $value] hostname: " . $hostname."\n";
-        echo " head(\$this->configs['hosts']): " . print_r(head($this->configs['hosts']), true) ."\n";
+        if($value !== $default_hostname){
+            // make a hosts item with new host value from the default one
+            $this->configs['hosts'][$value] = $this->configs['hosts'][$default_hostname];
+            // remove the default one
+            unset($this->configs['hosts'][$default_hostname]);
+        }
 
-        if ($key !== 'name') {
-            $this->configs['hosts'][$hostname][$key] = $value;
+        $this->host = $value;
 
+        return $this;
+    }
+
+    public function setHostData($key, $value)
+    {
+        if(! $this->host ){
+            user_error("Can not set host data before host value is set.");
             return $this;
         }
 
-        if ($hostname === $value) {
-            return $this;
-        }
-
-        $this->configs['hosts'][$value] = $this->configs['hosts'][$hostname];
-        unset($this->configs['hosts'][$hostname]);
-        $this->setHost('deploy_path', "/var/www/$value");
+        $this->configs['hosts'][$this->host][$key] = $value;
 
         return $this;
     }
