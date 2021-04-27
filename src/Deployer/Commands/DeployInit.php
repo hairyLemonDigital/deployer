@@ -116,7 +116,7 @@ class DeployInit extends BaseCommand
         $ds = DIRECTORY_SEPARATOR;
 
         $this->info('- get host deploy_path: ' . $this->builder->getHost('deploy_path'));
-        $this->info('- builder->config: ' . print_r($this->builder->config, true) );
+        $this->info('- builder->config: ' . print_r($this->builder->configs, true) );
 
 
         $path = $this->ask(
