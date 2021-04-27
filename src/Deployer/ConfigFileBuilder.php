@@ -75,4 +75,37 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
     {
         return new ConfigFile($this->configs);
     }
+
+    public function getHostname()
+    {
+        return array_search(head($this->configs['hosts']), $this->configs['hosts']);
+    }
+
+    /**
+     * Update the host configurations with the given key/value pair.
+     *
+     * @return self
+     */
+    public function setHost($key, $value)
+    {
+        $hostname = $this->getHostname();
+
+        echo "hostname: " . print_r($hostname, true) ."\n\n";
+
+        if ($key !== 'name') {
+            $this->configs['hosts'][$hostname][$key] = $value;
+
+            return $this;
+        }
+
+        if ($hostname === $value) {
+            return $this;
+        }
+
+        $this->configs['hosts'][$value] = $this->configs['hosts'][$hostname];
+        unset($this->configs['hosts'][$hostname]);
+        $this->setHost('deploy_path', "/var/www/$value");
+
+        return $this;
+    }
 }
