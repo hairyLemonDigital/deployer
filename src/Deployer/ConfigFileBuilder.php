@@ -10,7 +10,8 @@ class ConfigFileBuilder extends LaravelDeployerConfigFileBuilder
 {
     const DEFAULT_PHP_VERSION = '7.3';
 
-    protected $configs = [
+    //change back to protected
+    public $configs = [
         'default' => 'normal', // the hairylemon one
         'strategies' => [],
         'hooks' => [
